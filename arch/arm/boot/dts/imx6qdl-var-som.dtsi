@@ -160,7 +160,7 @@
 		pwms = <&pwm2 0 50000>;
 		brightness-levels = <0 4 8 16 32 64 128 248>;
 		default-brightness-level = <7>;
-		status = "okay";
+		status = "disabled";
 	};
 
 	v4l2_cap_0 {
@@ -202,7 +202,7 @@
 &audmux {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_audmux_2>;
-	status = "okay";
+	status = "disabled";
 };
 
 &cpu0 {
@@ -238,35 +238,35 @@
 &dcic1 {
 	dcic_id = <0>;
 	dcic_mux = "dcic-hdmi";
-	status = "okay";
+	status = "disabled";
 };
 
 &dcic2 {
 	dcic_id = <1>;
 	dcic_mux = "dcic-lvds1";
-	status = "okay";
+	status = "disabled";
 };
 
 &hdmi_audio {
-	status = "okay";
+	status = "disabled";
 };
 
 &hdmi_cec {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hdmi_cec>;
-	status = "okay";
+	status = "disabled";
 };
 
 &hdmi_core {
 	ipu_id = <0>;
 	disp_id = <0>;
-	status = "okay";
+	status = "disabled";
 };
 
 &hdmi_video {
 	fsl,phy_reg_vlev = <0x0294>;
 	fsl,phy_reg_cksymtx = <0x800d>;
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c1 {
@@ -328,10 +328,13 @@
 	status = "okay";
 
 	/* DS1307 RTC module */
+	/* Why did we disable this? */
+	/*
 	rtc@0x68 {
 		compatible = "dallas,ds1307";
 		reg = <0x68>;
 	};
+	*/
 };
 
 &iomuxc {
@@ -347,8 +350,8 @@
 				/* for Bluetooth/wifi enable */
 				MX6QDL_PAD_SD3_DAT6__GPIO6_IO18		0x1b0b1
 				/* SDMMC2 CD/WP */
-				MX6QDL_PAD_KEY_COL4__GPIO4_IO14		0x80000000
-				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x80000000
+				/* MX6QDL_PAD_KEY_COL4__GPIO4_IO14		0x80000000 */
+				/* MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x80000000 */
 				/* USBOTG ID pin */
 				/*MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x80000000*/
 				/* PMIC INT */
@@ -356,13 +359,13 @@
 				/* Wifi Slow Clock */
 				MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT	0x000b0
 				/* Audio Clock */
-				MX6QDL_PAD_GPIO_0__CCM_CLKO1		0x130b0
+				/* MX6QDL_PAD_GPIO_0__CCM_CLKO1		0x130b0 */
 				/* Audio reset */
-				MX6QDL_PAD_GPIO_19__GPIO4_IO05		0x178b0
+				/* MX6QDL_PAD_GPIO_19__GPIO4_IO05		0x178b0 */
 				/* Camera Clock */
-				MX6QDL_PAD_GPIO_3__CCM_CLKO2		0x130b0
+				/* MX6QDL_PAD_GPIO_3__CCM_CLKO2		0x130b0 */
 				/* Resistive touch irq */
-				MX6QDL_PAD_DISP0_DAT4__GPIO4_IO25	0x178b0
+				/* MX6QDL_PAD_DISP0_DAT4__GPIO4_IO25	0x178b0 */
 			>;
 		};
 
@@ -510,12 +513,28 @@
 		};
 
 		/* Variscite Uart2 support */
+		/* UART to RS485 */
 		pinctrl_uart3_2: uart3grp-2 {	/* RX/TX RTS/CTS */
 			fsl,pins = <
 				MX6QDL_PAD_EIM_D25__UART3_RX_DATA	0x1b0b1
 				MX6QDL_PAD_EIM_D24__UART3_TX_DATA	0x1b0b1
 				MX6QDL_PAD_EIM_D23__UART3_CTS_B		0x1b0b1
 				MX6QDL_PAD_EIM_EB3__UART3_RTS_B		0x1b0b1
+			>;
+		};
+
+		/* GPS SIMCOM68V*/
+		pinctrl_uart4_2: uart4grp-2 {	/* RX/TX RTS/CTS */
+			fsl,pins = <
+				MX6QDL_PAD_CSI0_DAT13__UART4_RX_DATA	0x1b0b1
+			>;
+		};
+
+		/* LTS Uart 5*/
+		pinctrl_uart5_2: uart5grp-2 {	/* RX/TX*/
+			fsl,pins = <
+				MX6QDL_PAD_CSI0_DAT15__UART5_RX_DATA	0x1b0b1
+				MX6QDL_PAD_CSI0_DAT14__UART5_TX_DATA	0x1b0b1
 			>;
 		};
 
@@ -632,6 +651,13 @@
 			>;
 		};
 
+		pinctrl_flexcan2_1: flexcan2grp {
+			fsl,pins = <
+				MX6QDL_PAD_KEY_COL4__FLEXCAN2_TX	0x80000000
+				MX6QDL_PAD_KEY_ROW4__FLEXCAN2_RX	0x80000000
+			>;
+		};
+
 	};
 };
 
@@ -646,13 +672,14 @@
 &pcie {
 	reset-gpio    = <&gpio5 13 0>;	/* gpio pin num of power good signal */
 	wake-up-gpio  = <&gpio3 22 1>;	/* gpio pin num of incoming wakeup signal */
-	status = "okay";
+	status = "disabled";
 };
 
+/* Why is this disabled? */
 &pwm2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm2_1>;
-	status = "okay";
+	status = "disabled";
 };
 
 
@@ -688,9 +715,31 @@
 	status = "okay";
 };
 
+/* ttymxc4 UART */
+&uart4{
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4_2>;
+	fsl;
+	status = "okay";
+};
+
+/* ttymxc5 UART */
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5_2>;
+	fsl;
+	status = "okay";
+};
+
 &can1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_flexcan1_3>;
+	status = "okay";
+};
+
+&can2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_flexcan2_1>;
 	status = "okay";
 };
 
@@ -740,7 +789,7 @@
 	srp-disable;
 	hnp-disable;
 	adp-disable;
-	status = "okay";
+	status = "disabled";
 };
 
 &usbphy1 {
@@ -760,11 +809,11 @@
 	status = "okay";
 };
 
+/* Why did we do this? */
 &usdhc2 {	/* uSDHC2, MMC/SD card */
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc2_2>;
-	cd-gpios = <&gpio4 14 GPIO_ACTIVE_LOW>;
-	wp-gpios = <&gpio4 15 GPIO_ACTIVE_HIGH>;
+	non-removable;
 	no-1-8-v;
 	keep-power-in-suspend;
 	enable-sdio-wakeup;

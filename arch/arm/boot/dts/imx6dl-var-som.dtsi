@@ -131,11 +131,11 @@
 };
 
 &mxcfb1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &mxcfb2 {
-	status = "okay";
+	status = "disabled";
 };
 
 &pxp {
