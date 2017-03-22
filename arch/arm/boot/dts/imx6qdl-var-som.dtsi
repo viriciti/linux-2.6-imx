@@ -328,7 +328,6 @@
 	status = "okay";
 
 	/* DS1307 RTC module */
-	/* Why did we disable this? */
 	/*
 	rtc@0x68 {
 		compatible = "dallas,ds1307";
@@ -675,7 +674,6 @@
 	status = "disabled";
 };
 
-/* Why is this disabled? */
 &pwm2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm2_1>;
@@ -809,7 +807,6 @@
 	status = "okay";
 };
 
-/* Why did we do this? */
 &usdhc2 {	/* uSDHC2, MMC/SD card */
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc2_2>;
