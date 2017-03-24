@@ -16,6 +16,7 @@
 
 &mxcfb1 {
 	interface_pix_fmt = "RGB666";
+	status = "disabled";
 };
 
 &i2c3 {
@@ -24,17 +25,18 @@
 		reg = <0x38>;
 		mirror_h = <799>;
 		mirror_v = <479>;
+		status = "disabled";
 	};
 };
 
 &ldb {
-	status = "okay";
+	status = "disabled";
 
 	lvds-channel@0 {
 		fsl,data-mapping = "spwg";
 		fsl,data-width = <24>;
 		crtc = "ipu1-di0";
-		status = "okay";
+		status = "disabled";
 
 		display-timings {
 			native-mode = <&timing0>;
@@ -57,7 +59,7 @@
 		fsl,data-width = <18>;
 		crtc = "ipu1-di1";
 		primary;
-		status = "okay";
+		status = "disabled";
 
 		display-timings {
 			native-mode = <&timing1>;
