@@ -140,4 +140,5 @@
 
 &pxp {
 	status = "okay";
+	status = "disabled";
 };
